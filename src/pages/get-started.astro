@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+
+const paths = [
+  {
+    title: "Metabolic / GLP Research",
+    desc: "Products commonly used in GLP-pathway research.",
+    items: [{ name: "Retatrutide", href: "/products/retatrutide" }],
+  },
+  {
+    title: "Recovery Research",
+    desc: "Compounds commonly used in recovery-focused research models.",
+    items: [{ name: "BPC-157", href: "/products/bpc-157" }],
+  },
+  {
+    title: "Cognitive Research",
+    desc: "Peptides commonly used in cognitive-focused research contexts.",
+    items: [
+      { name: "Semax", href: "/products/semax" },
+      { name: "Selank", href: "/products/selank" },
+    ],
+  },
+  {
+    title: "Mitochondrial / Energy Research",
+    desc: "Mitochondrial signaling and energy-related research.",
+    items: [{ name: "MOTS-c", href: "/products/mots-c" }],
+  },
+  {
+    title: "Longevity Research",
+    desc: "Cellular function and longevity-focused research.",
+    items: [{ name: "NAD+", href: "/products/nad" }],
+  },
+  {
+    title: "Skin / Aesthetics Research",
+    desc: "Topical/aesthetics-adjacent research categories.",
+    items: [{ name: "Klow / Glow", href: "/products/klow" }],
+  },
+];
+---
+
+<Base title="Get Started | Vital Fit Peptides" description='Find the right research-use-only product based on your research category.'>
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Get Started</h1>
+      <p class="hero-sub">
+        Choose a research category to see the most relevant products. All items are sold strictly for laboratory research purposes only.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/shop">Browse All Products</a>
+        <a class="btn" href="/coas">COAs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>What are you researching?</h2>
+      <p class="muted">Pick a category to jump to the best starting point.</p>
+    </div>
+
+    <div class="tile-grid">
+      {paths.map((p) => (
+        <div class="tile card">
+          <div class="tile-top">
+            <h3>{p.title}</h3>
+            <p class="muted">{p.desc}</p>
+          </div>
+
+          <div class="tile-links">
+            {p.items.map((i) => (
+              <a class="tile-link" href={i.href}>
+                <span>{i.name}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="card section compliance-box">
+    <h2>Important</h2>
+    <ul class="compliance-list">
+      <li>Research use only. Not for human or veterinary use.</li>
+      <li>COAs are available by lot number.</li>
+      <li>Questions? Contact support for assistance selecting the correct product page.</li>
+    </ul>
+    <div class="inline-links">
+      <a class="btn" href="/faq">FAQ</a>
+      <a class="btn" href="/contact">Contact</a>
+    </div>
+  </section>
+</Base>
