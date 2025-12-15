@@ -151,18 +151,19 @@ const { title = "Vital Fit Peptides" } = Astro.props;
 
 .product-card{
   display:block;
-  padding:16px;
+  padding:18px;
   border:1px solid var(--border);
   border-radius:var(--radius);
-  background:rgba(255,255,255,.02);
+  background:#12131a;
   text-decoration:none;
-  transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
 }
 
-.product-card:hover{
-  transform:translateY(-2px);
-  border-color:rgba(139,92,246,.45);
-  background:rgba(255,255,255,.03);
+..product-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(139,92,246,.6);
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
 }
 
 .product-top{
@@ -175,6 +176,7 @@ const { title = "Vital Fit Peptides" } = Astro.props;
 .product-name{
   font-weight:800;
   letter-spacing:-0.02em;
+  color:var(--text);
 }
 
 .product-size{
