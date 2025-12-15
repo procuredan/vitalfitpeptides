@@ -9,16 +9,138 @@ const { title = "Vital Fit Peptides" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <header style="padding:12px;border-bottom:1px solid #ddd">
-      <strong>Vital Fit Peptides Header</strong>
-    </header>
+   <header class="site-header">
+  <div class="container">
+    <a href="/" class="logo">Vital Fit Peptides</a>
 
-    <main style="padding:16px">
+    <nav class="nav">
+      <a href="/shop">Shop</a>
+      <a href="/learn">Learn</a>
+      <a href="/coas">COAs</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+    <main class="site-main"></main>
       <slot />
     </main>
 
-    <footer style="padding:12px;border-top:1px solid #ddd">
-      Footer
-    </footer>
+    <footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>Vital Fit Peptides</strong>
+      <p class="muted">
+        Research-use-only peptides. Not for human or veterinary use.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/shipping-returns">Shipping & Returns</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
   </body>
+  <style>
+  :root{
+    --bg:#0b0c10;
+    --text:#f4f4f5;
+    --muted:rgba(244,244,245,.70);
+    --border:rgba(244,244,245,.12);
+    --card:rgba(244,244,245,.04);
+    --accent:#8b5cf6;
+    --radius:18px;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    line-height:1.6;
+  }
+
+  h1,h2,h3{
+    font-family:Sora,Inter,system-ui,sans-serif;
+    letter-spacing:-0.03em;
+    line-height:1.15;
+  }
+
+  a{ color:inherit; }
+
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+
+  .site-header{
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    background:rgba(11,12,16,.85);
+    backdrop-filter:saturate(120%) blur(10px);
+    z-index:10;
+  }
+
+  .logo{
+    text-decoration:none;
+    font-weight:800;
+    font-family:Sora,Inter,system-ui,sans-serif;
+    letter-spacing:-0.02em;
+  }
+
+  .nav a{
+    text-decoration:none;
+    margin-left:14px;
+    color:var(--muted);
+    font-weight:600;
+    font-size:14px;
+  }
+
+  .nav a:hover{ color:var(--text); }
+
+  .site-main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 20px;
+  }
+
+  .site-footer{
+    border-top:1px solid var(--border);
+    margin-top:48px;
+    padding:18px 0 32px;
+  }
+
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:start;
+    gap:24px;
+  }
+
+  .footer-links a{
+    display:block;
+    text-decoration:none;
+    color:var(--muted);
+    margin-bottom:8px;
+    font-size:14px;
+  }
+
+  .footer-links a:hover{ color:var(--text); }
+
+  .muted{
+    color:var(--muted);
+    font-size:13px;
+    margin:8px 0 0;
+    max-width:55ch;
+  }
+</style>
 </html>
