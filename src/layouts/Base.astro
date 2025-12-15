@@ -142,5 +142,61 @@ const { title = "Vital Fit Peptides" } = Astro.props;
     margin:8px 0 0;
     max-width:55ch;
   }
+  .product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+  margin-top:18px;
+}
+
+.product-card{
+  display:block;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.02);
+  text-decoration:none;
+  transition:transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.product-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(139,92,246,.45);
+  background:rgba(255,255,255,.03);
+}
+
+.product-top{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.product-name{
+  font-weight:800;
+  letter-spacing:-0.02em;
+}
+
+.product-size{
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+}
+
+.product-desc{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.product-cta{
+  margin-top:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:800;
+  font-size:14px;
+}
 </style>
 </html>
