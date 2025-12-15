@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import products from "../../data/products.json";
+
+export function getStaticPaths() {
+  return products.map((p) => ({
+    params: { slug: p.slug },
+    props: { product: p }
+  }));
+}
+
+const { product } = Astro.props;
+---
+<Base title={`${product.name} | Vital Fit Peptides`} description={`${product.name} — ${product.size} — For Research Use Only.`}>
+  <a href="/shop">← Back to Shop</a>
+
+  <h1 style="margin:10px 0 6px">{product.name}</h1>
+  <div style="opacity:.85;margin-bottom:12px">{product.size} • For Research Use Only</div>
+
+  <p style="max-width:80ch">{product.short}</p>
+
+  <div style="margin:16px 0;display:flex;gap:10px;flex-wrap:wrap">
+  {product.checkoutUrl && product.checkoutUrl !== "#" ? (
+    <a
+      href={product.checkoutUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      style="padding:10px 14px;border:1px solid #111;border-radius:12px;text-decoration:none;color:inherit;font-weight:700"
+    >
+      Buy Now (Checkout Champ)
+    </a>
+  ) : (
+    <span
+      style="padding:10px 14px;border:1px solid #ccc;border-radius:12px;opacity:.7"
+      title="Checkout links will be added soon"
+    >
+      Buy Now (coming soon)
+    </span>
+  )}
+
+  <a
+    href="/coas"
+    style="padding:10px 14px;border:1px solid #ccc;border-radius:12px;text-decoration:none;color:inherit"
+  >
+    View COAs
+  </a>
+</div>
+
+  <hr style="margin:22px 0;border:none;border-top:1px solid #eee" />
+
+  <h2>COA / Lot Information</h2>
+  <p style="max-width:80ch">
+    COAs are available by lot number. Please reference the lot code on your vial label or visit the COAs page.
+  </p>
+
+  <h2>Compliance</h2>
+  <ul>
+    <li>Sold strictly for laboratory research purposes.</li>
+    <li>Not for human or veterinary use.</li>
+  </ul>
+</Base>
