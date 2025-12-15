@@ -317,5 +317,47 @@ const { title = "Vital Fit Peptides" } = Astro.props;
   color: var(--muted);
 }
 .compliance-list li{ margin: 8px 0; }
+.section{ margin-top: 26px; }
+.section-head{ margin-bottom: 12px; }
+
+.tile-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.tile{
+  padding: 18px;
+}
+
+.tile-top h3{ margin: 0 0 8px; }
+.tile-top p{ margin: 0; }
+
+.tile-links{
+  margin-top: 14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.tile-link{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 12px 14px;
+  border:1px solid var(--border);
+  border-radius: 14px;
+  background:#12131a;
+  text-decoration:none;
+  font-weight: 900;
+}
+
+.tile-link:hover{
+  border-color: rgba(139,92,246,.6);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  transform: translateY(-1px);
+}
+
+.compliance-box{ padding: 20px; }
 </style>
 </html>
