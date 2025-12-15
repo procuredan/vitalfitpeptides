@@ -1,12 +1,13 @@
 ---
----
 import Base from "../layouts/Base.astro";
 import products from "../data/products.json";
 ---
 
 <Base title="Shop | Vital Fit Peptides" description="Browse research-use-only peptides.">
   <h1>Shop</h1>
-  <p class="muted" style="margin-top:6px">Select a product to view details and documentation.</p>
+  <p class="muted" style="margin-top:6px">
+    Select a product to view details.
+  </p>
 
   <div class="product-grid">
     {products.map((p) => (
@@ -20,7 +21,7 @@ import products from "../data/products.json";
 
         <div class="product-cta">
           <span>View details</span>
-          <span aria-hidden="true">→</span>
+          <span>→</span>
         </div>
       </a>
     ))}
