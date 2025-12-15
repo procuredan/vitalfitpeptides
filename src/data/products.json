@@ -4,5 +4,15 @@
   { "slug": "selank", "name": "Selank", "size": "10mg", "short": "Peptide supplied strictly for laboratory research use only.", "checkoutUrl": "#" },
   { "slug": "bpc-157", "name": "BPC-157", "size": "10mg", "short": "Peptide supplied strictly for laboratory research use only.", "checkoutUrl": "#" },
   { "slug": "retatrutide", "name": "Retatrutide", "size": "10mg", "short": "Peptide supplied strictly for laboratory research use only.", "checkoutUrl": "#" },
-  { "slug": "klow", "name": "Klow", "size": "10mg", "short": "Signature Vital Fit Peptides product supplied for laboratory research use only.", "checkoutUrl": "#" }
+  { "slug": "klow", "name": "Klow", "size": "10mg", "short": "Signature Vital Fit Peptides product supplied for laboratory research use only.", "checkoutUrl": "#" },
+  {
+  "slug": "nad",
+  "name": "NAD+",
+  "size": "10mg",
+  "short": "Research-use-only NAD+ supplied for laboratory research use only.",
+  "packaging": "Lyophilized vial",
+  "documentation": "COA available by lot number",
+  "status": "Preparing checkout links",
+  "checkoutUrl": ""
+}
 ]
