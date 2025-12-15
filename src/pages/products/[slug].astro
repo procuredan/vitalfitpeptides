@@ -5,57 +5,75 @@ import products from "../../data/products.json";
 export function getStaticPaths() {
   return products.map((p) => ({
     params: { slug: p.slug },
-    props: { product: p }
+    props: { product: p },
   }));
 }
 
 const { product } = Astro.props;
+
+// If you don't have CheckoutChamp URLs yet, this will show "Coming soon"
+const buyUrl = product.checkoutUrl && product.checkoutUrl !== "#" ? product.checkoutUrl : null;
 ---
-<Base title={`${product.name} | Vital Fit Peptides`} description={`${product.name} — ${product.size} — For Research Use Only.`}>
-  <a href="/shop">← Back to Shop</a>
 
-  <h1 style="margin:10px 0 6px">{product.name}</h1>
-  <div style="opacity:.85;margin-bottom:12px">{product.size} • For Research Use Only</div>
+<Base title={`${product.name} | Vital Fit Peptides`} description={`${product.name} — ${product.size} — research-use-only.`}>
+  <div class="crumbs">
+    <a href="/shop">← Back to Shop</a>
+  </div>
 
-  <p style="max-width:80ch">{product.short}</p>
+  <section class="product-hero card">
+    <div class="product-hero-top">
+      <div>
+        <div class="badge">Research Use Only</div>
+        <h1 class="product-title">{product.name}</h1>
+        <p class="muted product-sub">{product.size}</p>
+        <p class="product-short">{product.short}</p>
+      </div>
 
-  <div style="margin:16px 0;display:flex;gap:10px;flex-wrap:wrap">
-  {product.checkoutUrl && product.checkoutUrl !== "#" ? (
-    <a
-      href={product.checkoutUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      style="padding:10px 14px;border:1px solid #111;border-radius:12px;text-decoration:none;color:inherit;font-weight:700"
-    >
-      Buy Now (Checkout Champ)
-    </a>
-  ) : (
-    <span
-      style="padding:10px 14px;border:1px solid #ccc;border-radius:12px;opacity:.7"
-      title="Checkout links will be added soon"
-    >
-      Buy Now (coming soon)
-    </span>
-  )}
+      <div class="product-actions">
+        {buyUrl ? (
+          <a class="btn btn-primary" href={buyUrl}>Buy Now</a>
+        ) : (
+          <button class="btn btn-disabled" disabled>Buy (Coming Soon)</button>
+        )}
 
-  <a
-    href="/coas"
-    style="padding:10px 14px;border:1px solid #ccc;border-radius:12px;text-decoration:none;color:inherit"
-  >
-    View COAs
-  </a>
-</div>
+        <a class="btn" href="/coas">View COAs</a>
+      </div>
+    </div>
 
-  <hr style="margin:22px 0;border:none;border-top:1px solid #eee" />
+    <div class="product-meta">
+      <div class="meta-item">
+        <div class="meta-k">Packaging</div>
+        <div class="meta-v">Lyophilized vial</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-k">Documentation</div>
+        <div class="meta-v">COA available by lot number</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-k">Status</div>
+        <div class="meta-v">{buyUrl ? "Available" : "Preparing checkout links"}</div>
+      </div>
+    </div>
+  </section>
 
-  <h2>COA / Lot Information</h2>
-  <p style="max-width:80ch">
-    COAs are available by lot number. Please reference the lot code on your vial label or visit the COAs page.
-  </p>
+  <section class="card product-section">
+    <h2>COA / Lot Information</h2>
+    <p class="muted">
+      Certificates of Analysis are provided by lot number. If you need a COA, visit the COAs page or email your lot number.
+    </p>
+    <div class="inline-links">
+      <a class="btn" href="/coas">COAs</a>
+      <a class="btn" href="mailto:coas@vitalfitpeptides.com?subject=COA%20Request%20-%20Lot%20Number&body=Product:%20{product.name}%0ALot%20Number:%20">Request via Email</a>
+    </div>
+  </section>
 
-  <h2>Compliance</h2>
-  <ul>
-    <li>Sold strictly for laboratory research purposes.</li>
-    <li>Not for human or veterinary use.</li>
-  </ul>
+  <section class="card product-section">
+    <h2>Compliance</h2>
+    <ul class="compliance-list">
+      <li>Sold strictly for laboratory research purposes only.</li>
+      <li>Not for human or veterinary use.</li>
+      <li>Not intended to diagnose, treat, cure, or prevent any disease.</li>
+      <li>Handle and store according to standard laboratory practices.</li>
+    </ul>
+  </section>
 </Base>

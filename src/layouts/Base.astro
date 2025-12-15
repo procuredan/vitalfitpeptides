@@ -200,5 +200,122 @@ const { title = "Vital Fit Peptides" } = Astro.props;
   font-weight:800;
   font-size:14px;
 }
+.crumbs{
+  margin: 6px 0 14px;
+}
+.crumbs a{
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+.crumbs a:hover{ color: var(--text); }
+
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: rgba(139,92,246,.10);
+  color: var(--text);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+
+.product-hero{
+  padding: 22px;
+}
+.product-hero-top{
+  display:flex;
+  justify-content:space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.product-title{
+  margin: 10px 0 6px;
+}
+.product-sub{
+  margin: 0 0 10px;
+  font-weight: 800;
+}
+.product-short{
+  margin: 12px 0 0;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.product-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  align-items:flex-start;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  text-decoration:none;
+  font-weight: 800;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.btn-primary{
+  background: var(--accent);
+  border-color: transparent;
+  color: #fff;
+}
+.btn-disabled{
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.product-meta{
+  margin-top: 18px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.meta-item{
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #12131a;
+}
+.meta-k{
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.meta-v{
+  margin-top: 6px;
+  font-weight: 800;
+}
+
+.product-section{
+  margin-top: 16px;
+  padding: 20px;
+}
+.inline-links{
+  margin-top: 12px;
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+}
+.compliance-list{
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+.compliance-list li{ margin: 8px 0; }
 </style>
 </html>
