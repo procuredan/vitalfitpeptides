@@ -1,29 +1,242 @@
 ---
 import Base from "../layouts/Base.astro";
 import products from "../data/products.json";
+
+// simple helpers
+const isComingSoon = (p) => !p.checkoutUrl || p.checkoutUrl.trim() === "";
+const imgFor = (p) => p.image ? p.image : `/products/${p.slug}.png`;
 ---
 
-<Base title="Shop | Vital Fit Peptides" description="Browse research-use-only peptides.">
-  <h1>Shop</h1>
-  <p class="muted" style="margin-top:6px">
-    Select a product to view details.
-  </p>
+<Base
+  title="Shop | Vital Fit Peptides"
+  description='Browse research-use-only products. Not for human or veterinary use.'
+>
+  <section class="shop-hero">
+    <div class="hero card">
+      <div class="hero-left">
+        <h1>Shop</h1>
+        <p class="muted">
+          Research-use-only products supplied for laboratory research use only.
+          Choose a product to view details.
+        </p>
 
-  <div class="product-grid">
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/get-started">Not sure? Get Started →</a>
+          <a class="btn" href="/coas">View COAs</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="stat">
+          <div class="stat-num">{products.length}</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10mg</div>
+          <div class="stat-label">Default size</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">COA</div>
+          <div class="stat-label">By lot number</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="controls-inner card">
+      <div class="field">
+        <label for="q" class="muted">Search</label>
+        <input id="q" type="text" placeholder="Search (e.g., mots, semax, bpc…)" />
+      </div>
+
+      <div class="field">
+        <label for="status" class="muted">Availability</label>
+        <select id="status">
+          <option value="all">All</option>
+          <option value="available">Available now</option>
+          <option value="coming">Coming soon</option>
+        </select>
+      </div>
+
+      <div class="muted tiny">
+        Tip: product pages include packaging, documentation, and COA guidance.
+      </div>
+    </div>
+  </section>
+
+  <section class="grid" id="productGrid">
     {products.map((p) => (
-      <a class="product-card" href={`/products/${p.slug}`}>
-        <div class="product-top">
-          <div class="product-name">{p.name}</div>
-          <div class="product-size">{p.size}</div>
+      <a
+        class="p-card card"
+        href={`/products/${p.slug}`}
+        data-name={`${p.name} ${p.slug}`.toLowerCase()}
+        data-status={isComingSoon(p) ? "coming" : "available"}
+      >
+        <div class="p-media">
+          <img
+            src={imgFor(p)}
+            alt={`${p.name} vial`}
+            loading="lazy"
+            onerror="this.style.display='none'; this.parentElement.classList.add('fallback');"
+          />
+          <div class="p-badge">{isComingSoon(p) ? "Coming soon" : "Available"}</div>
         </div>
 
-        <p class="product-desc">{p.short}</p>
+        <div class="p-body">
+          <div class="p-top">
+            <div class="p-name">{p.name}</div>
+            <div class="p-size">{p.size}</div>
+          </div>
 
-        <div class="product-cta">
-          <span>View details</span>
-          <span>→</span>
+          <div class="p-desc muted">{p.short}</div>
+
+          <div class="p-cta">
+            <span class="muted">{isComingSoon(p) ? "View details" : "View & buy"}</span>
+            <span class="arrow">→</span>
+          </div>
         </div>
       </a>
     ))}
-  </div>
+  </section>
+
+  <script>
+    // super light storefront filtering (no framework)
+    const q = document.getElementById("q");
+    const status = document.getElementById("status");
+    const cards = Array.from(document.querySelectorAll(".p-card"));
+
+    function apply() {
+      const query = (q.value || "").trim().toLowerCase();
+      const st = status.value;
+
+      cards.forEach((c) => {
+        const name = c.getAttribute("data-name") || "";
+        const cs = c.getAttribute("data-status") || "all";
+
+        const okQuery = !query || name.includes(query);
+        const okStatus = st === "all" || cs === st;
+
+        c.style.display = okQuery && okStatus ? "" : "none";
+      });
+    }
+
+    q?.addEventListener("input", apply);
+    status?.addEventListener("change", apply);
+  </script>
+
+  <style>
+    .shop-hero { margin-top: 6px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 18px;
+      padding: 22px;
+    }
+    .hero h1 { margin: 0 0 6px; font-size: 42px; letter-spacing: -0.03em; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    .hero-right {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      align-content: start;
+      justify-items: end;
+    }
+    .stat {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,.03);
+    }
+    .stat-num { font-weight: 1000; font-size: 22px; letter-spacing: -0.02em; }
+    .stat-label { color: var(--muted); font-weight: 800; font-size: 12px; margin-top: 4px; }
+
+    .controls { margin-top: 16px; }
+    .controls-inner {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr 240px 1fr;
+      gap: 12px;
+      align-items: end;
+    }
+    .field label { display: block; font-size: 12px; font-weight: 900; margin-bottom: 6px; }
+    input, select {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      outline: none;
+      font-weight: 800;
+    }
+    input::placeholder { color: rgba(255,255,255,.45); font-weight: 800; }
+    input:focus, select:focus { border-color: rgba(139,92,246,.55); }
+
+    .tiny { font-size: 12px; text-align: right; }
+
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .p-card { text-decoration: none; overflow: hidden; transition: transform .15s ease, border-color .15s ease; }
+    .p-card:hover { transform: translateY(-3px); border-color: rgba(139,92,246,.45); }
+
+    .p-media {
+      position: relative;
+      height: 160px;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(400px 180px at 30% 0%, rgba(139,92,246,.18), transparent 55%),
+                  radial-gradient(300px 160px at 80% 0%, rgba(34,211,238,.12), transparent 55%),
+                  rgba(255,255,255,.02);
+      display: grid;
+      place-items: center;
+    }
+    .p-media img {
+      max-height: 120px;
+      max-width: 85%;
+      opacity: .95;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.45));
+    }
+    .p-media.fallback::after{
+      content: "Vial image";
+      color: rgba(255,255,255,.55);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .p-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 12px;
+      font-weight: 1000;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+    }
+
+    .p-body { padding: 16px; }
+    .p-top { display:flex; justify-content:space-between; align-items:baseline; gap: 10px; }
+    .p-name { font-weight: 1000; letter-spacing: -0.02em; }
+    .p-size { color: var(--muted); font-weight: 900; font-size: 13px; }
+    .p-desc { margin-top: 10px; font-size: 14px; line-height: 1.55; min-height: 44px; }
+    .p-cta { margin-top: 14px; display:flex; justify-content:space-between; align-items:center; font-weight: 1000; }
+    .arrow { opacity: .85; }
+
+    @media (max-width: 900px){
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { grid-template-columns: repeat(3, 1fr); justify-items: stretch; }
+      .controls-inner { grid-template-columns: 1fr; }
+      .tiny { text-align: left; }
+    }
+  </style>
 </Base>
