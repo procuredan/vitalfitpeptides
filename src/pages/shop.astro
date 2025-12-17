@@ -178,11 +178,14 @@ const imgFor = (p) => p.image ? p.image : `/products/${p.slug}.png`;
     .tiny { font-size: 12px; text-align: right; }
 
     .grid {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
+  margin-top: 16px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  justify-items: stretch;
+}
+    
 
     .p-card { text-decoration: none; overflow: hidden; transition: transform .15s ease, border-color .15s ease; }
     .p-card:hover { transform: translateY(-3px); border-color: rgba(139,92,246,.45); }
